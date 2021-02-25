@@ -36,20 +36,16 @@ int main(int argc, char* argv[]) {
         char commit_id[7];
         git_oid_tostr(commit_id, 7, commit_oid);
 
-        float prevLenPlaceholder = 0;
-
         float hue = 201;
         float sat = .45;
         float lumLow = .25;
         float lumHigh = .5;
 
-        float* args[] {&prevLenPlaceholder, &hue, &sat, &lumLow, &lumHigh};
+        float* args[] {&hue, &sat, &lumLow, &lumHigh};
 
         for (int i = 1; i < argc; i++) {
             *(args[i-1]) = strtof(argv[i], nullptr);
         }
-
-        int prevLength = (int) prevLenPlaceholder;
 
         int numCols = 2 + is_branch * 2;
 
@@ -72,7 +68,8 @@ int main(int argc, char* argv[]) {
                .resetColour().text(" " + std::string(branch)).highlight(rCols[3]).colour(rCols[2]).text("");
         }
         fmt.resetColour().text(" ").highlight(base_colour).colour(cols[0]).text("")
-           .resetColour().text(" " + std::string(commit_id));
+           .resetColour().text(" " + std::string(commit_id)).resetHighlight().colour(base_colour).text(" ")
+           .resetAll();
 
         std::string gitline = fmt.toString();
 
@@ -97,17 +94,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        if (gitline_erased.length() < prevLength - 1) {
-            fmt.resetHighlight().colour(base_colour).text(" ")
-               .resetAll();
-        } else if (gitline_erased.length() > prevLength - 1) {
-            fmt.resetHighlight().colour(base_colour).text(" ")
-               .resetAll();
-        } else {
-            fmt.text(" ").resetAll();
-        }
-
-        std::cout << fmt.toString() << std::endl;
+        std::cout << gitline << std::endl;
     }
 }
 
