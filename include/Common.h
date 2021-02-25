@@ -28,14 +28,7 @@ namespace bh::ps1 {
         static std::array<float, 3> HSLtoRGB(float hue, float sat, float lum);
     };
 
-    template<unsigned long NUMBER>
-    std::array<float, NUMBER> numArray(float low, float high) {
-        std::array<float, NUMBER> ret;
-        for (int i = 0; i < NUMBER; i++) {
-            ret[i] = low + (float) (i+1) * (high - low) / (float) (NUMBER + 1);
-        }
-        return ret;
-    }
+    std::vector<float> numArray(float low, float high, int number);
 }
 
 

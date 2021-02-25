@@ -28,17 +28,17 @@ bh::ps1::Formatting &bh::ps1::Formatting::highlight(const std::array<float, 3> &
 }
 
 bh::ps1::Formatting &bh::ps1::Formatting::resetColour() {
-    data.emplace_back("\\e[39m");
+    data.emplace_back("\\[\\e[39m\\]");
     return *this;
 }
 
 bh::ps1::Formatting &bh::ps1::Formatting::resetHighlight() {
-    data.emplace_back("\\e[49m");
+    data.emplace_back("\\[\\e[49m\\]");
     return *this;
 }
 
 bh::ps1::Formatting &bh::ps1::Formatting::resetAll() {
-    data.emplace_back("\\e[0m");
+    data.emplace_back("\\[\\e[0m\\]");
     return *this;
 }
 
@@ -59,4 +59,13 @@ std::array<float, 3> bh::ps1::Colour::HSLtoRGB(float hue, float sat, float lum) 
     };
 
     return {f(0), f(8), f(4)};
+}
+
+std::vector<float> bh::ps1::numArray(float low, float high, int number) {
+    std::vector<float> ret;
+    ret.reserve(number);
+    for (int i = 0; i < number; i++) {
+        ret.push_back(low + (float) (i+1) * (high - low) / (float) (number + 1));
+    }
+    return ret;
 }
