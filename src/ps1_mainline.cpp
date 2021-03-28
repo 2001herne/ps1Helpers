@@ -39,7 +39,8 @@ int main(int argc, char* argv[]) {
         colours.push_back(bh::ps1::Colour::HSLtoRGB(hue, sat, lum));
     }
 
-    bh::ps1::Formatting fmt;
+    bh::ps1::Formatting fmt {};
+    fmt.setUsedInBash(true);
     fmt.highlight(base_colour).text(" ").highlight(colours[1]).colour(base_colour).text("")
        .resetColour().text(" \\u@\\h").highlight(colours[0]).colour(colours[1]).text("")
        .resetColour().text(" \\W").highlight(base_colour).colour(colours[0]).text("")

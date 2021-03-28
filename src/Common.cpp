@@ -26,7 +26,9 @@ bh::ps1::Formatting &bh::ps1::Formatting::colour(const std::array<float, 3> &rgb
     int r = (int) std::round(rgb[0]);
     int g = (int) std::round(rgb[1]);
     int b = (int) std::round(rgb[2]);
-    data.push_back("\\[\\e[38;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m\\]");
+    if (usedInBash) {data.push_back(bashOpen);}
+    data.push_back("\\e[38;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m]");
+    if (usedInBash) {data.push_back(bashClose);}
     return *this;
 }
 
@@ -34,22 +36,30 @@ bh::ps1::Formatting &bh::ps1::Formatting::highlight(const std::array<float, 3> &
     int r = (int) std::round(rgb[0]);
     int g = (int) std::round(rgb[1]);
     int b = (int) std::round(rgb[2]);
-    data.push_back("\\[\\e[48;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m\\]");
+    if (usedInBash) {data.push_back(bashOpen);}
+    data.push_back("\\e[48;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m");
+    if (usedInBash) {data.push_back(bashClose);}
     return *this;
 }
 
 bh::ps1::Formatting &bh::ps1::Formatting::resetColour() {
-    data.emplace_back("\\[\\e[39m\\]");
+    if (usedInBash) {data.push_back(bashOpen);}
+    data.emplace_back("\\e[39m");
+    if (usedInBash) {data.push_back(bashClose);}
     return *this;
 }
 
 bh::ps1::Formatting &bh::ps1::Formatting::resetHighlight() {
-    data.emplace_back("\\[\\e[49m\\]");
+    if (usedInBash) {data.push_back(bashOpen);}
+    data.emplace_back("\\e[49m");
+    if (usedInBash) {data.push_back(bashClose);}
     return *this;
 }
 
 bh::ps1::Formatting &bh::ps1::Formatting::resetAll() {
-    data.emplace_back("\\[\\e[0m\\]");
+    if (usedInBash) {data.push_back(bashOpen);}
+    data.emplace_back("\\e[0m");
+    if (usedInBash) {data.push_back(bashClose);}
     return *this;
 }
 
@@ -59,6 +69,11 @@ std::string bh::ps1::Formatting::toString() {
         myData.append(elem);
     }
     return myData;
+}
+
+bh::ps1::Formatting &bh::ps1::Formatting::setUsedInBash(bool state) {
+    this->usedInBash = state;
+    return *this;
 }
 
 std::array<float, 3> bh::ps1::Colour::HSLtoRGB(float hue, float sat, float lum) {

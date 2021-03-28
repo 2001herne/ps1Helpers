@@ -22,22 +22,27 @@
 
 namespace bh::ps1 {
     class Formatting {
-    private:
-        std::vector<std::string> data;
-    public:
-        Formatting& text(std::string text);
-        Formatting& colour(const std::array<float, 3>& rgb);
-        Formatting& highlight(const std::array<float, 3>& rgb);
-        Formatting& resetColour();
-        Formatting& resetHighlight();
-        Formatting& resetAll();
-        std::string toString();
-    };
+        private:
+            std::vector<std::string> data;
+            bool usedInBash = false;
+            std::string bashOpen = "\\[";
+            std::string bashClose = "\\]";
+
+        public:
+            Formatting& text(std::string text);
+            Formatting& colour(const std::array<float, 3>& rgb);
+            Formatting& highlight(const std::array<float, 3>& rgb);
+            Formatting& resetColour();
+            Formatting& resetHighlight();
+            Formatting& resetAll();
+            std::string toString();
+            Formatting& setUsedInBash(bool state);
+        };
 
     class Colour {
-    public:
-        static std::array<float, 3> HSLtoRGB(float hue, float sat, float lum);
-    };
+        public:
+            static std::array<float, 3> HSLtoRGB(float hue, float sat, float lum);
+        };
 
     std::vector<float> numArray(float low, float high, int number);
 }

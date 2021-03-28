@@ -70,7 +70,8 @@ int main(int argc, char* argv[]) {
 
         auto rCols = cols.rbegin();
 
-        bh::ps1::Formatting fmt;
+        bh::ps1::Formatting fmt {};
+        fmt.setUsedInBash(true);
         fmt.highlight(base_colour).text(" ").highlight(rCols[0]).colour(base_colour).text("")
            .resetColour().text(" " + repo_name).highlight(rCols[1]).colour(rCols[0]).text("");
         if (is_branch) {
