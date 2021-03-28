@@ -27,7 +27,7 @@ bh::ps1::Formatting &bh::ps1::Formatting::colour(const std::array<float, 3> &rgb
     int g = (int) std::round(rgb[1]);
     int b = (int) std::round(rgb[2]);
     if (usedInBash) {data.push_back(bashOpen);}
-    data.push_back("\\e[38;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m]");
+    data.push_back("\\e[38;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m");
     if (usedInBash) {data.push_back(bashClose);}
     return *this;
 }
