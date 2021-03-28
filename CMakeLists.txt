@@ -21,11 +21,23 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_BUILD_)
 
-add_executable(ps1_mainline src/ps1_mainline.cpp src/Common.cpp)
-target_include_directories(ps1_mainline PRIVATE include)
+add_library(libps1common src/Common.cpp)
+target_include_directories(libps1common PRIVATE include)
 
-add_executable(ps1_gitline src/ps1_gitline.cpp src/Common.cpp)
-target_include_directories(ps1_gitline PRIVATE include)
-target_link_libraries(ps1_gitline git2)
+add_executable(ps1mainline src/ps1_mainline.cpp)
+target_include_directories(ps1mainline PRIVATE include)
+add_dependencies(ps1mainline libps1common)
+target_link_libraries(ps1mainline libps1common)
 
-install(TARGETS ps1_mainline ps1_gitline DESTINATION bin)
+add_executable(ps1gitline src/ps1_gitline.cpp)
+target_include_directories(ps1gitline PRIVATE include)
+add_dependencies(ps1gitline libps1common)
+target_link_libraries(ps1gitline libps1common git2)
+
+add_executable(ps1sudoprompt src/ps1_sudoprompt.cpp)
+target_include_directories(ps1sudoprompt PRIVATE include)
+add_dependencies(ps1sudoprompt libps1common)
+target_link_libraries(ps1sudoprompt libps1common)
+
+install(TARGETS libps1common DESTINATION lib)
+install(TARGETS ps1mainline ps1gitline ps1sudoprompt DESTINATION bin)
