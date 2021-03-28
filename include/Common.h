@@ -22,11 +22,26 @@
 
 namespace bh::ps1 {
     class Formatting {
+        public:
+            enum SpecialMode {
+                NONE,
+                BASH,
+                SUDO
+            };
         private:
             std::vector<std::string> data;
-            bool usedInBash = false;
-            std::string bashOpen = "\\[";
-            std::string bashClose = "\\]";
+            SpecialMode mode = NONE;
+
+            inline static const std::string bashOpen = "\\[";
+            inline static const std::string bashClose = "\\]";
+
+            inline static const std::string escapeSequenceStart = "\\e[";
+            inline static const std::string escapeSequenceEnd = "m";
+
+            inline static const std::string sudoEscapeSequenceStart = "\x1b[";
+
+            void startEscape();
+            void endEscape();
 
         public:
             Formatting& text(std::string text);
@@ -36,8 +51,8 @@ namespace bh::ps1 {
             Formatting& resetHighlight();
             Formatting& resetAll();
             std::string toString();
-            Formatting& setUsedInBash(bool state);
-        };
+            Formatting& setMode(SpecialMode mode);
+    };
 
     class Colour {
         public:

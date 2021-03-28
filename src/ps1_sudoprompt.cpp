@@ -34,6 +34,7 @@ int main(int argc, char* argv[]) {
     }
 
     bh::ps1::Formatting fmt {};
+    fmt.setMode(bh::ps1::Formatting::SUDO);
     fmt.highlight(baseColour).text(" ").highlight(colours[1]).colour(baseColour).text("")
        .resetColour().text(" SUDO").highlight(colours[0]).colour(colours[1]).text("")
        .resetColour().text(" Enter password for %u").highlight(baseColour).colour(colours[0]).text("")

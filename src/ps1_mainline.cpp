@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
     }
 
     bh::ps1::Formatting fmt {};
-    fmt.setUsedInBash(true);
+    fmt.setMode(bh::ps1::Formatting::BASH);
     fmt.highlight(base_colour).text(" ").highlight(colours[1]).colour(base_colour).text("")
        .resetColour().text(" \\u@\\h").highlight(colours[0]).colour(colours[1]).text("")
        .resetColour().text(" \\W").highlight(base_colour).colour(colours[0]).text("")
