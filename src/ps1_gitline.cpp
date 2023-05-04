@@ -1,4 +1,4 @@
-//  Copyright 2021 Benjamin Herne
+//  Copyright 2023 Benjamin Herne
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
 
         bh::ps1::Formatting fmt {};
         fmt.setMode(bh::ps1::Formatting::BASH);
-        fmt.highlight(base_colour).text(" ").highlight(rCols[0]).colour(base_colour).text("")
+        fmt.highlight(base_colour).text(" 󰊢").highlight(rCols[0]).colour(base_colour).text("")
            .resetColour().text(" " + repo_name).highlight(rCols[1]).colour(rCols[0]).text("");
         if (is_branch) {
             fmt.resetColour().text(" ").highlight(rCols[2]).colour(rCols[1]).text("")
