@@ -16,5 +16,4 @@ Note: Depends on [libgit2](https://github.com/libgit2/libgit2).
 
 ## Installing
 Currently, as I am really only putting this out there as a here, see what you want to do with it sort  
-of thing, there are no packages distributed for any linux distro. With that said, an Arch linux  
-PKGBUILD can be found [here](https://github.com/2001herne/ps1Helpers-PKGBUILD).
+of thing, there are no packages distributed for any Linux distro.
